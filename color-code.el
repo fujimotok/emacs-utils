@@ -46,4 +46,5 @@ A 0.0-1.0"
       (kill-new ret)
       (message ret))))
 
+(provide 'color-code)
 ;;; color-code.el ends here

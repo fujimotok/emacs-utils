@@ -5,7 +5,7 @@
 ;;; interactive
 ;;;###autoload
 (defun timetable (s e)
-  "Update timetable formated 'HH:MM MM' Title in region.
+  "Update timetable formated 'HH:MM MM Title' in region.
 before
 13:00 [10] opening
 13:00 [20] presentation

@@ -12,6 +12,8 @@
   (split-window-horizontally)
   (balance-windows))
 
+;;; interactive
+;;;###autoload
 (defun window-split-2:1 ()
   "Split horizontal 2:1"
   (interactive)

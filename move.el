@@ -67,5 +67,24 @@ ARG times"
     (interactive "^p")
   (forward-to-symbol (- arg)))
 
+;;;###autoload
+(defun transpose-regexp (beg end regexp)
+  "Transpose the current region using an ad-hoc rule read from the minibuffer.
+BEG and END mark the limits of the region.  Interactively, this function
+prompts for the regular expression REGEXP to transpose with.
+
+For example,
+A = B;
+^^^^^ region
+regexp: _=_
+
+result:
+B = A;
+"
+  (interactive "r\nsTranspose regexp: ")
+  (let ((rg (format "\\(.+\\)%s\\(.+\\)" regexp))
+        (replace (format "\\2%s\\1" regexp)))
+    (query-replace-regexp rg replace nil beg end)))
+
 (provide 'move)
 ;;; move.el ends here

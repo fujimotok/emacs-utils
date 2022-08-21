@@ -39,4 +39,5 @@ PROCESS process object"
     (comint-send-input)
     (goto-char (point-max))))
 
+(provide 'python-shell)
 ;;; python-shell.el ends here

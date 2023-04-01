@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'dash)
+
+;;;###autoload
 (defun base-check (num &optional bits non-split)
   "指定されたbit数の2進数,8進数,10進数,16進数表記を文字列で返します"
   (let ((b (or bits 64))

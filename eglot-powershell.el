@@ -16,7 +16,14 @@
   :type 'string
   :group 'eglot-powershell)
 
-(defcustom eglot-powershell-lsp-command
+;;;###autoload
+(defun eglot-powershell-lsp-command ()
+  "Return lsp server command.
+You shoud used it follows.
+  (with-eval-after-load 'eglot
+    (add-to-list
+     'eglot-server-programs
+     \\=`(powershell-mode . ,(eglot-powershell-lsp-command))))"
   `(,eglot-powershell-pwsh-exe
    "-NoProfile" "-NonInteractive" "-NoLogo"
    ,@(if (eq system-type 'windows-nt) '("-ExecutionPolicy" "Bypass"))
@@ -33,15 +40,7 @@
    ;; "-AdditionalModules" "@('PowerShellEditorServices.VSCode')"
    "-Stdio"
    "-BundledModulesPath" ,(expand-file-name eglot-powershell-language-server-dir)
-   "-FeatureFlags" "@()")
-  "Start lsp server command."
-  :type 'string
-  :group 'eglot-powershell)
-
-(with-eval-after-load 'eglot
-  (add-to-list
-   'eglot-server-programs
-   `(powershell-mode . ,eglot-powershell-lsp-command)))
+   "-FeatureFlags" "@()"))
 
 ;;; interactive
 ;;;###autoload

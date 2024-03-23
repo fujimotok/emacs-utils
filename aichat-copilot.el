@@ -71,7 +71,8 @@
      :style style
      :on-success (lambda (msg)
                    (when-let ((content (aichat-bingai-message-type-2-text msg)))
-                     (funcall success-fn content cur-buf reg-beg reg-end)))
+                     (funcall success-fn content cur-buf reg-beg reg-end))
+                   (aichat-bingai-conversation-reset))
      :on-error (lambda (err)
                  (message "Error: %s" err)))))
 

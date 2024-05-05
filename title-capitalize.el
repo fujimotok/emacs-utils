@@ -31,7 +31,8 @@
         (replace-regexp-in-string regexp
                                   (lambda (match) (downcase match))
                                   it
-                                  fixed-case))))
+                                  fixed-case)
+        (upcase-initials it))))
 
 ;;; interactive
 ;;;###autoload

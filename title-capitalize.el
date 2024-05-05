@@ -25,14 +25,18 @@
 
 (defun title-capitalize-string (str)
   (let ((fixed-case t) ;; Do not convert according to the case of the matched word
-        (regexp (title-capitalize--regexp)))
+        (regexp-down-case-words (title-capitalize--regexp))
+        (regexp-line-head-char "^\\(.\\)"))
     (--> str
         (capitalize it) ;; Upcase the first letter of each word
-        (replace-regexp-in-string regexp
+        (replace-regexp-in-string regexp-down-case-words
                                   (lambda (match) (downcase match))
                                   it
                                   fixed-case)
-        (upcase-initials it))))
+        (replace-regexp-in-string regexp-line-head-char
+                                  (lambda (match) (upcase match))
+                                  it
+                                  fixed-case))))
 
 ;;; interactive
 ;;;###autoload

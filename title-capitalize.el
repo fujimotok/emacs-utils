@@ -16,8 +16,10 @@
 
 (defun title-capitalize--regexp ()
   (--> title-capitalize-down-case-words
-       (mapconcat 'identity it "\\|")
-       (concat "\\(" it "\\)")))
+       (mapconcat 'identity it "\\|") ;; Concatenate with 'OR' symbol
+       (concat "\\(" it "\\)") ;; Grouping
+       (concat "\\b" it "\\b") ;; Match word by word
+       ))
 
 (defun title-capitalize-string (str)
   (let ((fixed-case t) ;; Do not convert according to the case of the matched word

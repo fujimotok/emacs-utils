@@ -7,9 +7,11 @@
   "convert title case")
 
 (defcustom title-capitalize-down-case-words
-  '("and" "but" "or" "nor " "for" "yet" "so" "as" "at" "but" "by" "for" "from"
-    "in" "into" "of" "off" "on" "out" "over" "than" "till" "to" "up" "with"
-    "y" "de" "del")
+  '(;; article
+    "a" "an" "the"
+    ;; preposition
+    "and" "but" "or" "nor " "for" "yet" "so" "as" "at" "but" "by" "for" "from"
+    "in" "into" "of" "off" "on" "out" "over" "than" "till" "to" "up" "with")
   "define down case words"
   :type 'list
   :group 'title-capitalize)

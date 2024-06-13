@@ -35,6 +35,7 @@ You shoud used it follows.
    "-HostVersion" "8.0.1"
    "-LogPath" ,(expand-file-name "emacs-powershell.log" eglot-powershell-language-server-dir)
    "-LogLevel" "Normal"
+   "-EnableConsoleRepl"
    "-SessionDetailsPath" ,(expand-file-name (format "PSES-VSCode-%d" (emacs-pid))
                                             eglot-powershell-language-server-dir)
    ;; "-AdditionalModules" "@('PowerShellEditorServices.VSCode')"

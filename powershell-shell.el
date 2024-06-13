@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (require 'powershell)
+(require 'eglot)
 
 ;;; interactive
 ;;;###autoload
@@ -30,14 +31,25 @@ E region end point"
           (split-string region-string "[\n\r]"))))
 
 (defun my-powershell-shell-send-string (string process)
-    "Send string to the process.
+  "Send string to the process.
 STRING substring up to newline is sent.
 PROCESS process object"
+  (let ((str (car (split-string string "[\n\r]"))))
+    (my-powershell-shell-send-server str)
     (with-current-buffer (process-buffer process)
-    (goto-char (point-max))
-    (insert (car (split-string string "[\n\r]")))
-    (comint-send-input)
-    (goto-char (point-max))))
+      (goto-char (point-max))
+      (insert str)
+      (comint-send-input)
+      (goto-char (point-max)))))
+
+(defun my-powershell-shell-send-server (string)
+    "Send string to language server.
+This works for completion based on the results of command execution."
+  (ignore-errors
+      (jsonrpc-request (eglot--current-server-or-lose)
+                       :evaluate
+                       `(:expression ,string)
+                       :timeout 0.1)))
 
 (provide 'powershell-shell)
 ;;; powershell-shell.el ends here

@@ -53,7 +53,8 @@
                       (-> content
                           (aichat-copilot--extract-markdown-code-blocks)))))
     (with-current-buffer cur-buf
-      (replace-region-contents reg-beg reg-end replace-fn))))
+      (replace-region-contents reg-beg reg-end replace-fn)
+      (indent-region (region-beginning) (region-end)))))
 
 (defun aichat-copilot--output-buffer (content _ _ _)
   (switch-to-buffer-other-window "*Bing AI*")

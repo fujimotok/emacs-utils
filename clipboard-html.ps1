@@ -8,7 +8,11 @@ function FindStartPos()
         $SearchString
     )
 
-    $index = $Text.ToLower().IndexOf($SearchString.ToLower())
+    #$index = $Text.ToLower().IndexOf($SearchString.ToLower())
+
+    $match = Select-String -InputObject $Text.ToLower() -Pattern $SearchString.ToLower()
+    $index = $match.Matches[0].Index
+    $matchString = $match.Matches[0].Value
 
     if ($index -eq -1) {
         return 0
@@ -19,7 +23,7 @@ function FindStartPos()
 
     # バイト数計算して返す
     $substringLen = [System.Text.Encoding]::UTF8.GetBytes($substring).Length
-    $searchStringLen = [System.Text.Encoding]::UTF8.GetBytes($SearchString).Length 
+    $searchStringLen = [System.Text.Encoding]::UTF8.GetBytes($matchString).Length 
 
     return $substringLen + $searchStringLen
 }
@@ -157,7 +161,7 @@ function InsertFragment()
         $Text
     )
 
-    $start = FindStartPos $Text "<body>"
+    $start = FindStartPos $Text "<body.*?>"
     $ret = $Text.Insert($start, "<!--StartFragment-->")
 
     $end = FindEndPos $ret "</body>"
@@ -197,7 +201,7 @@ $header = CreateHeader @params
 )
 
 # # HTML文字列を作成
-# $input = @"
+# $Text = @"
 # <!DOCTYPE html>
 # <html>
 # <head>
